@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { NavLink as Link } from "react-router-dom";
-import arrow from "../../images/arrow-icon.png";
+import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
 
 import * as colors from "../../colors";
@@ -19,7 +19,7 @@ const SideNavBar = () => {
                 // exact
             >
                 Wesley
-                <NavIcon></NavIcon>
+                <NavIcon src={Arrow} alt="Down arrow icon" />
             </SideNavMainLink>
             <SideNavMainLink
                 className="menu_nav_link"
@@ -27,8 +27,14 @@ const SideNavBar = () => {
                 // activeClassName="active"
             >
                 Discover
-                <NavIcon></NavIcon>
+                <NavIcon
+                    src={SearchWhite}
+                    alt="Search icon"
+                    width={28}
+                    height={28}
+                ></NavIcon>
             </SideNavMainLink>
+
             <SideNavHeader>
                 <HeaderText>Watched</HeaderText>
             </SideNavHeader>
@@ -46,6 +52,7 @@ const SideNavBar = () => {
             >
                 Tv Shows
             </NavLink>
+
             <SideNavHeader>
                 <HeaderText>Saved</HeaderText>
             </SideNavHeader>
@@ -61,7 +68,7 @@ const SideNavBar = () => {
                 to="/saved/tv-shows"
                 // activeClassName="active"
             >
-                Tv Shows
+                TV Shows
             </NavLink>
         </SideNavBarCont>
     );
@@ -79,23 +86,39 @@ const SideNavBarCont = styled.div`
 
 const SideNavMainLink = styled(Link)`
     position: relative;
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 25px 35px;
     font-size: 1.6em;
     font-weight: 700;
     color: white;
+
+    &[aria-current="page"] {
+        background-color: ${colors.primaryColor};
+    }
 `;
 
-const NavIcon = styled.div`
-    position: absolute;
-    right: 35px;
-    top: 50%;
-`;
+const NavIcon = styled.img``;
 
-const SideNavHeader = styled.div``;
+const SideNavHeader = styled.p`
+    color: #fff;
+    font-size: 1.6em;
+    margin-left: 35px;
+    margin-bottom: 15px;
+    padding: 25px 0 15px 0;
+    border-bottom: 2px solid ${colors.fontColor};
+`;
 
 const HeaderText = styled.div``;
 
 const NavLink = styled(Link)`
+    font-size: 1.1em;
     display: block;
+    color: #fff;
+    padding: 5px 0 5px 35px;
+
+    &:hover {
+        background-color: ${colors.sideNavBarHover};
+    }
 `;
