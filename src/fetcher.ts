@@ -51,8 +51,6 @@ export const getDiscoverMovies = async (
         },
     });
 
-    console.log(response);
-
     if (response.status !== 200) {
         throw new Error("Failed to fetch movies");
     }
