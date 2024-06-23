@@ -10,7 +10,11 @@ const Checkbox = ({ label }: CheckboxProps) => {
 
     return (
         <CheckboxCont>
-            <CheckboxInput name={label} type="checkbox" />
+            <CheckboxInput
+                name={label}
+                type="checkbox"
+                onChange={() => console.log("WIP: filter checkbox toggled")}
+            />
             <label htmlFor={label}>{label}</label>
         </CheckboxCont>
     );
