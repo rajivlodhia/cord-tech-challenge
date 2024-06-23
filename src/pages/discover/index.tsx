@@ -54,26 +54,28 @@ const Discover = () => {
     return (
         <DiscoverWrapper>
             <MobilePageTitle>Discover</MobilePageTitle>
-            <MovieFilters>
-                <SearchFilters
-                    genres={optionsData.genreOptions}
-                    ratings={optionsData.ratingOptions}
-                    languages={optionsData.languageOptions}
-                    searchMovies={(keyword, year) =>
-                        searchMovies(keyword, year)
-                    }
-                />
-            </MovieFilters>
-            <MovieResults>
-                {optionsData.totalCount > 0 && (
-                    <TotalCounter>{optionsData.totalCount} movies</TotalCounter>
-                )}
-                <MovieList
-                    movies={optionsData.results || []}
-                    genres={optionsData.genreOptions || []}
-                />
-                {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
-            </MovieResults>
+            {optionsData.totalCount > 0 && (
+                <TotalCounter>{optionsData.totalCount} movies</TotalCounter>
+            )}
+            <MovieWrapper>
+                <MovieResults>
+                    <MovieList
+                        movies={optionsData.results || []}
+                        genres={optionsData.genreOptions || []}
+                    />
+                    {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
+                </MovieResults>
+                <MovieFilters>
+                    <SearchFilters
+                        genres={optionsData.genreOptions}
+                        ratings={optionsData.ratingOptions}
+                        languages={optionsData.languageOptions}
+                        searchMovies={(keyword, year) =>
+                            searchMovies(keyword, year)
+                        }
+                    />
+                </MovieFilters>
+            </MovieWrapper>
         </DiscoverWrapper>
     );
 };
@@ -82,6 +84,12 @@ export default Discover;
 
 const DiscoverWrapper = styled.div`
     padding: 60px 35px;
+`;
+
+const MovieWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
 `;
 
 const TotalCounter = styled.div``;
