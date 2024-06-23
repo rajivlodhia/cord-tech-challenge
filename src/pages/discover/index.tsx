@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import SearchFilters from "../../components/searchfilter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MovieList from "../../components/movielist";
-import { getDiscoverMovies } from "../../fetcher";
+import { getDiscoverMovies, getMovieGenres } from "../../fetcher";
 
 const Discover = () => {
     const [optionsData, setOptionsData] = useState({
@@ -29,15 +29,28 @@ const Discover = () => {
     });
 
     // Write a function to preload the popular movies when page loads & get the movie genres
-    const getMovies = (keyword: string, year: number) => {
-        getDiscoverMovies(keyword, year).then((data) => {
-            setOptionsData({
-                ...optionsData,
-                keyword: data.keyword,
-                year: data.year,
-                results: data.results,
-                totalCount: data.total_results,
-            });
+    const getMoviesAndGenres = async (keyword: string, year: number) => {
+        const genreData = await getMovieGenres();
+        const movieData = await getDiscoverMovies(keyword, year);
+
+        setOptionsData({
+            ...optionsData,
+            genreOptions: genreData.genres,
+            keyword: movieData.keyword,
+            year: movieData.year,
+            results: movieData.results,
+            totalCount: movieData.total_results,
+        });
+    };
+
+    const getMovies = async (keyword: string, year: number) => {
+        const movieData = await getDiscoverMovies(keyword, year);
+
+        setOptionsData({
+            ...optionsData,
+            results: movieData.results,
+            keyword: keyword,
+            year: year,
         });
     };
 
@@ -48,12 +61,13 @@ const Discover = () => {
         getMovies(keyword, year);
     };
 
-    // Run the getMovies function when the page loads using default options.
-    getMovies(optionsData.keyword, optionsData.year);
+    // Run the getMovies() and getGenres to populate movie data on page load.
+    useEffect(() => {
+        getMoviesAndGenres(optionsData.keyword, optionsData.year);
+    }, []);
 
     return (
         <DiscoverWrapper>
-            <MobilePageTitle>Discover</MobilePageTitle>
             {optionsData.totalCount > 0 && (
                 <TotalCounter>{optionsData.totalCount} movies</TotalCounter>
             )}
@@ -97,5 +111,3 @@ const TotalCounter = styled.div``;
 const MovieResults = styled.div``;
 
 const MovieFilters = styled.div``;
-
-const MobilePageTitle = styled.header``;
