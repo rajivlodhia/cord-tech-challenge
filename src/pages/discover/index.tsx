@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import SearchFilters from "../../components/searchfilter";
 import { useEffect, useState } from "react";
-import MovieList from "../../components/movielist";
 import { getDiscoverMovies, getMovieGenres } from "../../fetcher";
 import { Movie } from "../../entities/Movie";
 import MovieItem from "../../components/movieitem";
