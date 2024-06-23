@@ -2,9 +2,10 @@ import styled, { css } from "styled-components";
 
 import ExpandableFilters from "../expandablefilters";
 import SearchBar from "../searchbar";
+import { Genre } from "../../entities/Genre";
 
 type SearchFiltersProps = {
-    genres: string[];
+    genres: Genre[];
     ratings: { id: number; name: number }[];
     languages: { id: string; name: string }[];
     searchMovies: (keyword: string, year: number) => void;
@@ -18,9 +19,13 @@ const SearchFilters = (props: SearchFiltersProps) => {
                 <SearchBar />
             </SearchFiltersCont>
             <SearchFiltersCont>
-                <CategoryTitle>Movies</CategoryTitle>
+                <CategoryTitle>Movie</CategoryTitle>
                 {/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
-                <ExpandableFilters />
+                <ExpandableFilters
+                    genres={props.genres}
+                    ratings={props.ratings}
+                    languages={props.languages}
+                />
             </SearchFiltersCont>
         </FiltersWrapper>
     );
@@ -45,4 +50,6 @@ const SearchFiltersCont = styled.div`
         `}
 `;
 
-const CategoryTitle = styled.div``;
+const CategoryTitle = styled.p`
+    font-weight: 600;
+`;
