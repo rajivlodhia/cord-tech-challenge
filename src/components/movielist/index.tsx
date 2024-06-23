@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { Movie } from "../../entities/Movie";
+import MovieItem from "../movieitem";
 
 type MovieListProps = {
-    movies: string[];
+    movies: Movie[];
     genres: string[];
 };
 
@@ -9,6 +11,9 @@ const MovieList = ({ movies, genres }: MovieListProps) => {
     return (
         <MoviesWrapper>
             {/* Finish the MovieItem component and use it here to display the movie results */}
+            {movies.map((movie) => (
+                <MovieItem key={movie.id} movie={movie} />
+            ))}
         </MoviesWrapper>
     );
 };

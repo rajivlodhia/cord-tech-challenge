@@ -2,6 +2,7 @@ import styled from "styled-components";
 import SearchFilters from "../../components/searchfilter";
 import { useState } from "react";
 import MovieList from "../../components/movielist";
+import { getDiscoverMovies } from "../../fetcher";
 
 const Discover = () => {
     const [optionsData, setOptionsData] = useState({
@@ -28,12 +29,27 @@ const Discover = () => {
     });
 
     // Write a function to preload the popular movies when page loads & get the movie genres
+    const getMovies = (keyword: string, year: number) => {
+        getDiscoverMovies(keyword, year).then((data) => {
+            setOptionsData({
+                ...optionsData,
+                keyword: data.keyword,
+                year: data.year,
+                results: data.results,
+                totalCount: data.total_results,
+            });
+        });
+    };
 
     // Write a function to get the movie details based on the movie id taken from the URL.
 
     const searchMovies = async (keyword: string, year: number) => {
         // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
+        getMovies(keyword, year);
     };
+
+    // Run the getMovies function when the page loads using default options.
+    getMovies(optionsData.keyword, optionsData.year);
 
     return (
         <DiscoverWrapper>
@@ -50,9 +66,7 @@ const Discover = () => {
             </MovieFilters>
             <MovieResults>
                 {optionsData.totalCount > 0 && (
-                    <TotalCounter>
-                        {optionsData.totalCount} results
-                    </TotalCounter>
+                    <TotalCounter>{optionsData.totalCount} movies</TotalCounter>
                 )}
                 <MovieList
                     movies={optionsData.results || []}
@@ -70,9 +84,7 @@ const DiscoverWrapper = styled.div`
     padding: 60px 35px;
 `;
 
-const TotalCounter = styled.div`
-    font-weight: 900;
-`;
+const TotalCounter = styled.div``;
 
 const MovieResults = styled.div``;
 
