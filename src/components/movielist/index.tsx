@@ -4,9 +4,12 @@ import MovieItem from "../movieitem";
 
 type MovieListProps = {
     movies: Movie[];
-    genres: string[];
 };
-
+/**
+ *
+ * Redundant component: not current used anywhere.
+ *
+ */
 const MovieList = ({ movies, genres }: MovieListProps) => {
     return (
         <MoviesWrapper>

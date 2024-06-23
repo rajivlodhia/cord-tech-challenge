@@ -3,12 +3,14 @@ import SearchFilters from "../../components/searchfilter";
 import { useEffect, useState } from "react";
 import MovieList from "../../components/movielist";
 import { getDiscoverMovies, getMovieGenres } from "../../fetcher";
+import { Movie } from "../../entities/Movie";
+import MovieItem from "../../components/movieitem";
 
 const Discover = () => {
     const [optionsData, setOptionsData] = useState({
         keyword: "",
         year: 0,
-        results: [],
+        results: [] as Movie[],
         movieDetails: null,
         totalCount: 0,
         genreOptions: [],
@@ -73,10 +75,13 @@ const Discover = () => {
             )}
             <MovieWrapper>
                 <MovieResults>
-                    <MovieList
-                        movies={optionsData.results || []}
-                        genres={optionsData.genreOptions || []}
-                    />
+                    {optionsData.results.map((movie) => (
+                        <MovieItem
+                            key={movie.id}
+                            movie={movie}
+                            genres={optionsData.genreOptions}
+                        />
+                    ))}
                     {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
                 </MovieResults>
                 <MovieFilters>

@@ -2,12 +2,19 @@ import styled from "styled-components";
 import { Movie } from "../../entities/Movie";
 import { buildImageLink } from "../../utils/image-link-builder";
 import * as colors from "../../colors";
+import { Genre } from "../../entities/Genre";
 
 type MovieItemProps = {
     movie: Movie;
+    genres: Genre[];
 };
 
-const MovieItem = ({ movie }: MovieItemProps) => {
+const MovieItem = ({ movie, genres }: MovieItemProps) => {
+    const movieGenres = movie.genre_ids.map((genreId) => {
+        const genre = genres.find((genre) => genre.id === genreId);
+        return genre ? genre.name : "";
+    });
+
     return (
         // The MovieItemWrapper must be linked to the movie details popup
         <MovieItemWrapper>
@@ -24,7 +31,7 @@ const MovieItem = ({ movie }: MovieItemProps) => {
                         {movie.vote_average.toFixed(1)}
                     </p>
                 </div>
-                <p className="movie-genres">Action | Drama | Comedy</p>
+                <p className="movie-genres">{movieGenres.join(" | ")}</p>
                 <summary className="movie-summary truncate">
                     {movie.overview}
                 </summary>
