@@ -11,6 +11,7 @@ function App() {
                 <SideNavBar />
                 <ContentWrapper>
                     <Routes>
+                        {/* TODO: Make it so homepage switches to the /discover page */}
                         <Route path="/discover" element={<Discover />} />
                     </Routes>
                 </ContentWrapper>
