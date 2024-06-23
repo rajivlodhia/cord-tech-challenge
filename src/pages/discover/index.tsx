@@ -106,7 +106,10 @@ const MovieWrapper = styled.div`
     gap: 15px;
 `;
 
-const TotalCounter = styled.div``;
+const TotalCounter = styled.div`
+    font-size: 14px;
+    margin-bottom: 12px;
+`;
 
 const MovieResults = styled.div``;
 
