@@ -75,7 +75,7 @@ export const getSearchMovies = async (
     const response = await instance.get("/search/movie", {
         params: {
             query: searchQuery,
-            year: releaseYear,
+            primary_release_year: releaseYear,
             page: page,
         },
     });
