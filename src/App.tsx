@@ -23,7 +23,9 @@ function App() {
 export default App;
 
 const ContentWrapper = styled.div`
-    padding-left: 280px;
+    @media (min-width: 760px) {
+        padding-left: 260px;
+    }
 `;
 
 const PageContainer = styled.main`

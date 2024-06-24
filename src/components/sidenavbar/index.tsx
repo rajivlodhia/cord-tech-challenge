@@ -2,86 +2,107 @@ import styled from "styled-components";
 import { NavLink as Link } from "react-router-dom";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
+import Hamburger from "../../images/hamburger-icon.png";
 
 import * as colors from "../../colors";
-// import { useState } from "react";
+import { useState } from "react";
 
 const SideNavBar = () => {
-    // const [isSidebarActive, setIsSidebarActive] = useState(false);
+    const [isSidebarActive, setIsSidebarActive] = useState(false);
 
     return (
-        <SideNavBarCont>
-            {/* Implement a hamburger icon slide in effect for mobile devices */}
-            <SideNavMainLink
-                className="menu_nav_link main_nav_link"
-                to="/"
-                // activeClassName="active"
-                // exact
-            >
-                Wesley
-                <NavIcon src={Arrow} alt="Down arrow icon" />
-            </SideNavMainLink>
-            <SideNavMainLink
-                className="menu_nav_link"
-                to="/discover"
-                // activeClassName="active"
-            >
-                Discover
-                <NavIcon
-                    src={SearchWhite}
-                    alt="Search icon"
-                    width={28}
-                    height={28}
-                ></NavIcon>
-            </SideNavMainLink>
+        <>
+            <HamburgerIcon
+                src={Hamburger}
+                alt="Hamburger icon"
+                onClick={() => setIsSidebarActive(!isSidebarActive)}
+            />
+            <SideNavBarCont isSidebarActive={isSidebarActive}>
+                {/* Implement a hamburger icon slide in effect for mobile devices */}
 
-            <SideNavHeader>
-                <HeaderText>Watched</HeaderText>
-            </SideNavHeader>
-            <NavLink
-                className="menu_nav_link"
-                to="/watched/movies"
-                // activeClassName="active"
-            >
-                Movies
-            </NavLink>
-            <NavLink
-                className="menu_nav_link"
-                to="/watched/tv-shows"
-                // activeClassName="active"
-            >
-                Tv Shows
-            </NavLink>
+                <SideNavMainLink
+                    className="menu_nav_link main_nav_link"
+                    to="/"
+                    // activeClassName="active"
+                    // exact
+                >
+                    Wesley
+                    <NavIcon src={Arrow} alt="Down arrow icon" />
+                </SideNavMainLink>
+                <SideNavMainLink
+                    className="menu_nav_link"
+                    to="/discover"
+                    // activeClassName="active"
+                >
+                    Discover
+                    <NavIcon
+                        src={SearchWhite}
+                        alt="Search icon"
+                        width={28}
+                        height={28}
+                    ></NavIcon>
+                </SideNavMainLink>
 
-            <SideNavHeader>
-                <HeaderText>Saved</HeaderText>
-            </SideNavHeader>
-            <NavLink
-                className="menu_nav_link"
-                to="/saved/movies"
-                // activeClassName="active"
-            >
-                Movies
-            </NavLink>
-            <NavLink
-                className="menu_nav_link"
-                to="/saved/tv-shows"
-                // activeClassName="active"
-            >
-                TV Shows
-            </NavLink>
-        </SideNavBarCont>
+                <SideNavHeader>
+                    <HeaderText>Watched</HeaderText>
+                </SideNavHeader>
+                <NavLink
+                    className="menu_nav_link"
+                    to="/watched/movies"
+                    // activeClassName="active"
+                >
+                    Movies
+                </NavLink>
+                <NavLink
+                    className="menu_nav_link"
+                    to="/watched/tv-shows"
+                    // activeClassName="active"
+                >
+                    Tv Shows
+                </NavLink>
+
+                <SideNavHeader>
+                    <HeaderText>Saved</HeaderText>
+                </SideNavHeader>
+                <NavLink
+                    className="menu_nav_link"
+                    to="/saved/movies"
+                    // activeClassName="active"
+                >
+                    Movies
+                </NavLink>
+                <NavLink
+                    className="menu_nav_link"
+                    to="/saved/tv-shows"
+                    // activeClassName="active"
+                >
+                    TV Shows
+                </NavLink>
+            </SideNavBarCont>
+        </>
     );
 };
 
 export default SideNavBar;
 
-const SideNavBarCont = styled.div`
+type SideNavBarContProps = {
+    isSidebarActive: boolean;
+};
+
+const SideNavBarCont = styled.nav<SideNavBarContProps>`
+    transform: translateX(
+        ${({ isSidebarActive }) => (isSidebarActive ? "0" : "-100%")}
+    );
+    transition: transform 0.2s ease-in-out;
     position: fixed;
     z-index: 9;
-    width: 280px;
+    width: 260px;
     height: 100%;
     background-color: ${colors.sideNavBar};
+
+    @media (min-width: 760px) {
+        display: block;
+    }
 `;
 
 const SideNavMainLink = styled(Link)`
@@ -100,6 +121,20 @@ const SideNavMainLink = styled(Link)`
 `;
 
 const NavIcon = styled.img``;
+
+const HamburgerIcon = styled.img`
+    display: block;
+    position: absolute;
+    top: 57px;
+    right: 47px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    @media (min-width: 760px) {
+        display: none;
+    }
+`;
 
 const SideNavHeader = styled.p`
     color: #fff;

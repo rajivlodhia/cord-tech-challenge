@@ -84,6 +84,7 @@ const Discover = () => {
 
     return (
         <DiscoverWrapper>
+            <DiscoverHeading>Discover</DiscoverHeading>
             {optionsData.totalCount > 0 && (
                 <TotalCounter>{optionsData.totalCount} movies</TotalCounter>
             )}
@@ -106,7 +107,7 @@ const Discover = () => {
                                 </>
                             ) : (
                                 <>
-                                    <h1>No movies found... :(</h1>
+                                    <h2>No movies found... :(</h2>
                                     <p>Try searching for something else.</p>
                                 </>
                             )}
@@ -133,13 +134,26 @@ const Discover = () => {
 export default Discover;
 
 const DiscoverWrapper = styled.div`
-    padding: 60px 35px;
+    padding: 60px 45px;
+`;
+
+const DiscoverHeading = styled.h1`
+    font-size: 24px;
+    margin-bottom: 12px;
+
+    @media (min-width: 760px) {
+        display: none;
+    }
 `;
 
 const MovieWrapper = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     gap: 15px;
+
+    @media (min-width: 1080px) {
+        flex-direction: row;
+    }
 `;
 
 const TotalCounter = styled.div`
