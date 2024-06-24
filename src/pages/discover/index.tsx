@@ -145,7 +145,11 @@ type TotalCounterProps = {
 };
 
 const DiscoverWrapper = styled.div`
-    padding: 60px 45px;
+    padding: 25px;
+
+    @media (min-width: 760px) {
+        padding: 60px 45px;
+    }
 `;
 
 const DiscoverHeading = styled.h1`

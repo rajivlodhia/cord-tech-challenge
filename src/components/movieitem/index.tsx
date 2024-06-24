@@ -66,15 +66,30 @@ const RightCont = styled.div`
     .movie-header {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        margin-bottom: 4px;
+        margin-bottom: 8px;
+
+        h2 {
+            line-height: 1;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        @media (min-width: 760px) {
+            h2 {
+                font-size: 24px;
+            }
+        }
     }
 
     .movie-genres {
         font-weight: 600;
-        font-size: 13px;
+        font-size: 11px;
         color: ${colors.primaryColor};
         margin-bottom: 12px;
+
+        @media (min-width: 760px) {
+            font-size: 13px;
+        }
     }
 
     .movie-summary {
@@ -83,8 +98,12 @@ const RightCont = styled.div`
 
     .movie-release-date {
         margin: auto 0 0;
-        font-size: 13px;
+        font-size: 11px;
         color: ${colors.primaryColor};
+
+        @media (min-width: 760px) {
+            font-size: 13px;
+        }
     }
 
     .movie-rating {
@@ -95,6 +114,11 @@ const RightCont = styled.div`
         font-weight: 600;
         color: #fff;
         background-color: ${colors.primaryColor};
+        font-size: 14px;
+
+        @media (min-width: 760px) {
+            font-size: 16px;
+        }
     }
 
     // Truncate the text and add ellipsis for the summary for anything more than 5 lines

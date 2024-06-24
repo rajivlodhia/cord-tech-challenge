@@ -125,8 +125,8 @@ const NavIcon = styled.img``;
 const HamburgerIcon = styled.img`
     display: block;
     position: absolute;
-    top: 57px;
-    right: 47px;
+    top: 21px;
+    right: 26px;
     width: 30px;
     height: 30px;
     cursor: pointer;
