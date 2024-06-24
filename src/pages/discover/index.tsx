@@ -34,9 +34,9 @@ const Discover = () => {
     });
 
     // Write a function to preload the popular movies when page loads & get the movie genres
-    const getMoviesAndGenres = async (keyword: string, year: number) => {
+    const getMoviesAndGenres = async (year: number) => {
         const genreData = await getMovieGenres();
-        const movieData = await getDiscoverMovies(keyword, year);
+        const movieData = await getDiscoverMovies(year);
 
         setOptionsData({
             ...optionsData,
@@ -53,7 +53,15 @@ const Discover = () => {
     const searchMovies = async (queryString: string, releaseYear: number) => {
         // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
         // TODO: Add debounce to prevent too many API requests
-        const searchData = await getSearchMovies(queryString, releaseYear);
+        let searchData = null;
+        if (queryString) {
+            // If a search query is provided, fetch movies from Search endpoint.
+            // The searchQuery parameter is required, so we can't pass an empty string.
+            searchData = await getSearchMovies(queryString, releaseYear);
+        } else {
+            // If no search query is provided, fetch movies from Discover endpoint
+            searchData = await getDiscoverMovies(releaseYear);
+        }
 
         setOptionsData({
             ...optionsData,
@@ -66,7 +74,7 @@ const Discover = () => {
 
     // Run the getMovies() and getGenres to populate movie data on page load.
     useEffect(() => {
-        getMoviesAndGenres(optionsData.keyword, optionsData.year);
+        getMoviesAndGenres(optionsData.year);
     }, []);
 
     return (

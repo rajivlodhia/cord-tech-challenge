@@ -38,16 +38,11 @@ export const getMovieGenres = async () => {
  *
  * @returns {Promise<Object>} Returns a promise that resolves to an object containing the list of movies.
  */
-export const getDiscoverMovies = async (
-    keyword: string,
-    year: number,
-    page = 1
-) => {
+export const getDiscoverMovies = async (year: number, page = 1) => {
     const response = await instance.get("/discover/movie", {
         params: {
             page: page,
-            query: keyword,
-            year: year,
+            primary_release_year: year,
         },
     });
 
