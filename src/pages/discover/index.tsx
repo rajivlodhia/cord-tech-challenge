@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import SearchFilters from "../../components/searchfilter";
 import { useEffect, useState } from "react";
-import { getDiscoverMovies, getMovieGenres } from "../../fetcher";
+import {
+    getDiscoverMovies,
+    getMovieGenres,
+    getSearchMovies,
+} from "../../fetcher";
 import { Movie } from "../../entities/Movie";
 import MovieItem from "../../components/movieitem";
 
@@ -44,22 +48,20 @@ const Discover = () => {
         });
     };
 
-    const getMovies = async (keyword: string, year: number) => {
-        const movieData = await getDiscoverMovies(keyword, year);
+    // Write a function to get the movie details based on the movie id taken from the URL.
+
+    const searchMovies = async (queryString: string, releaseYear: number) => {
+        // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
+        // TODO: Add debounce to prevent too many API requests
+        const searchData = await getSearchMovies(queryString, releaseYear);
 
         setOptionsData({
             ...optionsData,
-            results: movieData.results,
-            keyword: keyword,
-            year: year,
+            results: searchData.results,
+            keyword: queryString,
+            year: releaseYear,
+            totalCount: searchData.total_results,
         });
-    };
-
-    // Write a function to get the movie details based on the movie id taken from the URL.
-
-    const searchMovies = async (keyword: string, year: number) => {
-        // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
-        getMovies(keyword, year);
     };
 
     // Run the getMovies() and getGenres to populate movie data on page load.

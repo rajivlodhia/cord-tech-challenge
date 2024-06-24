@@ -8,7 +8,7 @@ type SearchFiltersProps = {
     genres: Genre[];
     ratings: { id: number; name: number }[];
     languages: { id: string; name: string }[];
-    searchMovies: (keyword: string, year: number) => void;
+    searchMovies: (queryString: string, releaseYear: number) => void;
 };
 
 const SearchFilters = (props: SearchFiltersProps) => {
@@ -16,7 +16,7 @@ const SearchFilters = (props: SearchFiltersProps) => {
         <FiltersWrapper>
             <SearchFiltersCont className="search_inputs_cont" marginBottom>
                 {/* Implement a SearchBar component and use it for both the keyword and the year inputs */}
-                <SearchBar />
+                <SearchBar updateSearch={props.searchMovies} />
             </SearchFiltersCont>
             <SearchFiltersCont>
                 <CategoryTitle>Movie</CategoryTitle>

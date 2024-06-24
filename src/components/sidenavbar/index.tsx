@@ -1,10 +1,10 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { NavLink as Link } from "react-router-dom";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
 
 import * as colors from "../../colors";
-import { useState } from "react";
+// import { useState } from "react";
 
 const SideNavBar = () => {
     // const [isSidebarActive, setIsSidebarActive] = useState(false);

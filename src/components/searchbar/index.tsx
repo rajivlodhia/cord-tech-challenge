@@ -3,18 +3,43 @@ import styled from "styled-components";
 import * as colors from "../../colors";
 import SearchIcon from "../../images/search-icon-yellow.png";
 import CalendarIcon from "../../images/year-icon.png";
+import { useRef } from "react";
 
-const SearchBar = () => {
+type SearchBarProps = {
+    updateSearch: (queryString: string, releaseYear: number) => void;
+};
+
+const SearchBar = ({ updateSearch }: SearchBarProps) => {
+    const searchInputRef = useRef<HTMLInputElement>(null);
+    const searchDateRef = useRef<HTMLInputElement>(null);
+
+    const handleSearch = () => {
+        const searchQuery = searchInputRef.current?.value || "";
+        const releaseYearQuery = parseInt(searchDateRef.current?.value || "0");
+
+        updateSearch(searchQuery, releaseYearQuery);
+    };
+
     return (
         <>
             <SearchBarWrapper>
                 <SearchIconImg src={SearchIcon} alt="Search Icon" />
-                <SearchInput type="text" placeholder="Search for movies" />
+                <SearchInput
+                    type="text"
+                    placeholder="Search for movies"
+                    onChange={handleSearch}
+                    ref={searchInputRef}
+                />
             </SearchBarWrapper>
             <SearchDateWrapper>
                 <SearchIconImg src={CalendarIcon} alt="Calendar Icon" />
                 {/* TODO: Improve this with a date picker component */}
-                <SearchInput type="text" placeholder="Year of release" />
+                <SearchInput
+                    type="text"
+                    placeholder="Year of release"
+                    onChange={handleSearch}
+                    ref={searchDateRef}
+                />
             </SearchDateWrapper>
         </>
     );

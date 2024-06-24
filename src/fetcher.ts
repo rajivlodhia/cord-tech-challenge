@@ -57,3 +57,34 @@ export const getDiscoverMovies = async (
 
     return response.data;
 };
+
+/**
+ * Fetches the list of movies based on search parameters.
+ *
+ * @param searchQuery
+ * @param releaseDate
+ * @param page
+ *
+ * @returns {Promise<Object>} Returns a promise that resolves to an object containing the list of movies based on search parameters.
+ */
+export const getSearchMovies = async (
+    searchQuery: string,
+    releaseYear: number,
+    page = 1
+) => {
+    const response = await instance.get("/search/movie", {
+        params: {
+            query: searchQuery,
+            year: releaseYear,
+            page: page,
+        },
+    });
+
+    console.log(response);
+
+    if (response.status !== 200) {
+        throw new Error("Failed to fetch movies");
+    }
+
+    return response.data;
+};
