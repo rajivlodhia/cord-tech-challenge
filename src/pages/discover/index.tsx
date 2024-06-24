@@ -86,7 +86,9 @@ const Discover = () => {
         <DiscoverWrapper>
             <DiscoverHeading>Discover</DiscoverHeading>
             {optionsData.totalCount > 0 && (
-                <TotalCounter>{optionsData.totalCount} movies</TotalCounter>
+                <TotalCounter hiddenOnMobile>
+                    {optionsData.totalCount} movies
+                </TotalCounter>
             )}
             <MovieWrapper>
                 <MovieResults>
@@ -95,6 +97,11 @@ const Discover = () => {
                         <p>Loading...</p>
                     ) : (
                         <>
+                            {optionsData.totalCount > 0 && (
+                                <TotalCounter>
+                                    {optionsData.totalCount} movies
+                                </TotalCounter>
+                            )}
                             {optionsData.results.length > 0 ? (
                                 <>
                                     {optionsData.results.map((movie) => (
@@ -133,6 +140,10 @@ const Discover = () => {
 
 export default Discover;
 
+type TotalCounterProps = {
+    hiddenOnMobile?: boolean;
+};
+
 const DiscoverWrapper = styled.div`
     padding: 60px 45px;
 `;
@@ -156,9 +167,14 @@ const MovieWrapper = styled.div`
     }
 `;
 
-const TotalCounter = styled.div`
+const TotalCounter = styled.div<TotalCounterProps>`
     font-size: 14px;
     margin-bottom: 12px;
+    display: ${(props) => (props.hiddenOnMobile ? "none" : "block")};
+
+    @media (min-width: 1080px) {
+        display: ${(props) => (props.hiddenOnMobile ? "block" : "none")};
+    }
 `;
 
 const MovieResults = styled.div`
