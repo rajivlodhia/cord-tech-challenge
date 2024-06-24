@@ -33,6 +33,8 @@ const Discover = () => {
         ],
     });
 
+    const [isDataLoading, setIsDataLoading] = useState(false);
+
     // Write a function to preload the popular movies when page loads & get the movie genres
     const getMoviesAndGenres = async (year: number) => {
         const genreData = await getMovieGenres();
@@ -46,6 +48,8 @@ const Discover = () => {
             results: movieData.results,
             totalCount: movieData.total_results,
         });
+
+        setIsDataLoading(false);
     };
 
     // Write a function to get the movie details based on the movie id taken from the URL.
@@ -74,6 +78,7 @@ const Discover = () => {
 
     // Run the getMovies() and getGenres to populate movie data on page load.
     useEffect(() => {
+        setIsDataLoading(true);
         getMoviesAndGenres(optionsData.year);
     }, []);
 
@@ -84,22 +89,30 @@ const Discover = () => {
             )}
             <MovieWrapper>
                 <MovieResults>
-                    {optionsData.results.length > 0 ? (
-                        <>
-                            {optionsData.results.map((movie) => (
-                                <MovieItem
-                                    key={movie.id}
-                                    movie={movie}
-                                    genres={optionsData.genreOptions}
-                                />
-                            ))}
-                        </>
+                    {isDataLoading ? (
+                        // Temporary loading state
+                        <p>Loading...</p>
                     ) : (
                         <>
-                            <h1>No movies found... :(</h1>
-                            <p>Try searching for something else.</p>
+                            {optionsData.results.length > 0 ? (
+                                <>
+                                    {optionsData.results.map((movie) => (
+                                        <MovieItem
+                                            key={movie.id}
+                                            movie={movie}
+                                            genres={optionsData.genreOptions}
+                                        />
+                                    ))}
+                                </>
+                            ) : (
+                                <>
+                                    <h1>No movies found... :(</h1>
+                                    <p>Try searching for something else.</p>
+                                </>
+                            )}
                         </>
                     )}
+
                     {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
                 </MovieResults>
                 <MovieFilters>
