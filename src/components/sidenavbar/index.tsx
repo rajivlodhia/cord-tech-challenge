@@ -101,7 +101,7 @@ const SideNavBarCont = styled.nav<SideNavBarContProps>`
     background-color: ${colors.sideNavBar};
 
     @media (min-width: 760px) {
-        display: block;
+        transform: translateX(0);
     }
 `;
 

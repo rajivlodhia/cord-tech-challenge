@@ -24,7 +24,7 @@ const ExpandableFilterTrigger = ({
 export default ExpandableFilterTrigger;
 
 const TriggerButton = styled.button`
-    background-color: #fff;
+    background-color: transparent;
     color: ${colors.fontColor};
     display: flex;
     align-items: center;
@@ -40,5 +40,9 @@ const TriggerButton = styled.button`
         margin-right: 10px;
         width: 18px;
         height: 18px;
+    }
+
+    @media (min-width: 1080px) {
+        background-color: #fff;
     }
 `;

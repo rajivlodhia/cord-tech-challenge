@@ -1,47 +1,26 @@
 import styled from "styled-components";
 
 import * as colors from "../../colors";
-import SearchIcon from "../../images/search-icon-yellow.png";
-import CalendarIcon from "../../images/year-icon.png";
-import { useRef } from "react";
 
 type SearchBarProps = {
-    updateSearch: (queryString: string, releaseYear: number) => void;
+    icon: string;
+    imgAlt: string;
+    placeholder: string;
+    inputRef: React.RefObject<HTMLInputElement>;
+    updateSearch: () => void;
 };
 
-const SearchBar = ({ updateSearch }: SearchBarProps) => {
-    const searchInputRef = useRef<HTMLInputElement>(null);
-    const searchDateRef = useRef<HTMLInputElement>(null);
-
-    const handleSearch = () => {
-        const searchQuery = searchInputRef.current?.value || "";
-        const releaseYearQuery = parseInt(searchDateRef.current?.value || "0");
-
-        updateSearch(searchQuery, releaseYearQuery);
-    };
-
+const SearchBar = (props: SearchBarProps) => {
     return (
-        <>
-            <SearchBarWrapper>
-                <SearchIconImg src={SearchIcon} alt="Search Icon" />
-                <SearchInput
-                    type="text"
-                    placeholder="Search for movies"
-                    onChange={handleSearch}
-                    ref={searchInputRef}
-                />
-            </SearchBarWrapper>
-            <SearchDateWrapper>
-                <SearchIconImg src={CalendarIcon} alt="Calendar Icon" />
-                {/* TODO: Improve this with a date picker component */}
-                <SearchInput
-                    type="text"
-                    placeholder="Year of release"
-                    onChange={handleSearch}
-                    ref={searchDateRef}
-                />
-            </SearchDateWrapper>
-        </>
+        <SearchBarWrapper>
+            <SearchIconImg src={props.icon} alt={props.imgAlt} />
+            <SearchInput
+                type="text"
+                placeholder={props.placeholder}
+                onChange={props.updateSearch}
+                ref={props.inputRef}
+            />
+        </SearchBarWrapper>
     );
 };
 
@@ -53,19 +32,14 @@ const SearchBarWrapper = styled.div`
     margin-bottom: 15px;
     padding: 10px 0;
     border-bottom: 2px solid ${colors.primaryColor};
+    width: 100%;
     min-width: 300px;
 
     input {
-        font-weight: 900;
+        @media (min-width: 1080px) {
+            font-weight: 600;
+        }
     }
-`;
-
-const SearchDateWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 2px solid ${colors.primaryColor};
-    min-width: 300px;
 `;
 
 const SearchInput = styled.input`
