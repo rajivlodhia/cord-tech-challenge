@@ -76,13 +76,22 @@ const Discover = () => {
             )}
             <MovieWrapper>
                 <MovieResults>
-                    {optionsData.results.map((movie) => (
-                        <MovieItem
-                            key={movie.id}
-                            movie={movie}
-                            genres={optionsData.genreOptions}
-                        />
-                    ))}
+                    {optionsData.results.length > 0 ? (
+                        <>
+                            {optionsData.results.map((movie) => (
+                                <MovieItem
+                                    key={movie.id}
+                                    movie={movie}
+                                    genres={optionsData.genreOptions}
+                                />
+                            ))}
+                        </>
+                    ) : (
+                        <>
+                            <h1>No movies found... :(</h1>
+                            <p>Try searching for something else.</p>
+                        </>
+                    )}
                     {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
                 </MovieResults>
                 <MovieFilters>
@@ -117,6 +126,8 @@ const TotalCounter = styled.div`
     margin-bottom: 12px;
 `;
 
-const MovieResults = styled.div``;
+const MovieResults = styled.div`
+    width: 100%;
+`;
 
 const MovieFilters = styled.div``;
