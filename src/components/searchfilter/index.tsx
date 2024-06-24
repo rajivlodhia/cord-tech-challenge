@@ -33,11 +33,15 @@ const SearchFilters = (props: SearchFiltersProps) => {
 
 export default SearchFilters;
 
+type SearchFilterContProps = {
+    marginBottom?: boolean;
+};
+
 const FiltersWrapper = styled.div`
     position: relative;
 `;
 
-const SearchFiltersCont = styled.div`
+const SearchFiltersCont = styled.div<SearchFilterContProps>`
     background-color: white;
     padding: 20px;
     border-radius: 3px;
