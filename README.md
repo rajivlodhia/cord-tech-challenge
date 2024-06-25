@@ -12,3 +12,7 @@ As per the instructions, the homepage is left blank and all the functionality is
 2.  Run `npm install` or `npm i` to install all the necessary packages
 3.  Run `npm run dev` to start a development server
 4.  Click on the localhost URL provided by Vite in the terminal. It should be something like `http://localhost:5173/`
+
+Compile SCSS: `npm run build-css`
+
+Run build: `npm run build`
