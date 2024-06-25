@@ -138,6 +138,7 @@ const Discover = () => {
                     )}
 
                     {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
+                    {/* TODO: Not implemented yet because the popup wasn't included in the designs/wireframes. Each movie is linked to a unique URL - modal popup is pending wireframes. */}
                 </MovieResults>
                 <MovieFilters>
                     <SearchFilters
