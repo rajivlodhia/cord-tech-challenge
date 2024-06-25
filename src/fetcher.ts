@@ -81,3 +81,19 @@ export const getSearchMovies = async (
 
     return response.data;
 };
+
+/**
+ * Fetches the details of a movie from the movie ID.
+ *
+ * @param movieId
+ * @returns {Promise<Object>} Returns a promise that resolves to an object containing the details of a movie.
+ */
+export const getMovieDetails = async (movieId: number) => {
+    const response = await instance.get(`/movie/${movieId}`);
+
+    if (response.status !== 200) {
+        throw new Error("Failed to fetch movie details");
+    }
+
+    return response.data;
+};

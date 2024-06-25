@@ -1,13 +1,10 @@
 import styled from "styled-components";
 import SearchFilters from "../../components/searchfilter";
 import { useEffect, useState } from "react";
-import {
-    getDiscoverMovies,
-    getMovieGenres,
-    getSearchMovies,
-} from "../../fetcher";
+import * as fetcher from "../../fetcher";
 import { Movie } from "../../entities/Movie";
 import MovieItem from "../../components/movieitem";
+import { Link } from "react-router-dom";
 
 const Discover = () => {
     const [optionsData, setOptionsData] = useState({
@@ -37,8 +34,8 @@ const Discover = () => {
 
     // Write a function to preload the popular movies when page loads & get the movie genres
     const getMoviesAndGenres = async (year: number) => {
-        const genreData = await getMovieGenres();
-        const movieData = await getDiscoverMovies(year);
+        const genreData = await fetcher.getMovieGenres();
+        const movieData = await fetcher.getDiscoverMovies(year);
 
         setOptionsData({
             ...optionsData,
@@ -53,6 +50,14 @@ const Discover = () => {
     };
 
     // Write a function to get the movie details based on the movie id taken from the URL.
+    const getMovieDetails = async (movieId: number) => {
+        const movieDetails = await fetcher.getMovieDetails(movieId);
+
+        setOptionsData({
+            ...optionsData,
+            movieDetails: movieDetails,
+        });
+    };
 
     const searchMovies = async (queryString: string, releaseYear: number) => {
         // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
@@ -61,10 +66,13 @@ const Discover = () => {
         if (queryString) {
             // If a search query is provided, fetch movies from Search endpoint.
             // The searchQuery parameter is required, so we can't pass an empty string.
-            searchData = await getSearchMovies(queryString, releaseYear);
+            searchData = await fetcher.getSearchMovies(
+                queryString,
+                releaseYear
+            );
         } else {
             // If no search query is provided, fetch movies from Discover endpoint
-            searchData = await getDiscoverMovies(releaseYear);
+            searchData = await fetcher.getDiscoverMovies(releaseYear);
         }
 
         setOptionsData({
@@ -105,11 +113,17 @@ const Discover = () => {
                             {optionsData.results.length > 0 ? (
                                 <>
                                     {optionsData.results.map((movie) => (
-                                        <MovieItem
+                                        <Link
+                                            to={`/movie/${movie.id}`}
                                             key={movie.id}
-                                            movie={movie}
-                                            genres={optionsData.genreOptions}
-                                        />
+                                        >
+                                            <MovieItem
+                                                movie={movie}
+                                                genres={
+                                                    optionsData.genreOptions
+                                                }
+                                            />
+                                        </Link>
                                     ))}
                                 </>
                             ) : (
