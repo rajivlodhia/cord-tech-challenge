@@ -136,7 +136,7 @@ const HamburgerIcon = styled.img`
     }
 `;
 
-const SideNavHeader = styled.p`
+const SideNavHeader = styled.div`
     color: #fff;
     font-size: 1.6em;
     margin-left: 35px;
@@ -145,7 +145,7 @@ const SideNavHeader = styled.p`
     border-bottom: 2px solid ${colors.fontColor};
 `;
 
-const HeaderText = styled.div``;
+const HeaderText = styled.p``;
 
 const NavLink = styled(Link)`
     font-size: 1.1em;
