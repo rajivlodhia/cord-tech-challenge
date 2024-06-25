@@ -39,6 +39,7 @@ const SearchFilters = (props: SearchFiltersProps) => {
                     imgAlt="Search icon"
                     placeholder="Search for movies"
                     inputRef={searchInputRef}
+                    fontBold
                 />
                 <FiltersIcon
                     src={FilterIcon}
@@ -46,7 +47,11 @@ const SearchFilters = (props: SearchFiltersProps) => {
                     onClick={() => setIsFiltersOpen(!isFiltersOpen)}
                 />
             </SearchFiltersCont>
-            <SearchFiltersCont marginBottom hideOnMobile={!isFiltersOpen}>
+            <SearchFiltersCont
+                marginBottom
+                paddingTopDesktop={0}
+                hideOnMobile={!isFiltersOpen}
+            >
                 <SearchBar
                     updateSearch={handleSearch}
                     icon={CalendarIcon}
@@ -76,6 +81,7 @@ export default SearchFilters;
 type SearchFilterContProps = {
     marginBottom?: boolean;
     hideOnMobile?: boolean;
+    paddingTopDesktop?: number;
 };
 
 const FiltersWrapper = styled.div`
@@ -109,6 +115,12 @@ const SearchFiltersCont = styled.div<SearchFilterContProps>`
         display: block;
         padding: 20px;
         background-color: white;
+
+        ${(props) =>
+            props.paddingTopDesktop !== undefined &&
+            css`
+                padding-top: ${props.paddingTopDesktop}px;
+            `}
     }
 
     ${(props) =>

@@ -8,11 +8,12 @@ type SearchBarProps = {
     placeholder: string;
     inputRef: React.RefObject<HTMLInputElement>;
     updateSearch: () => void;
+    fontBold?: boolean;
 };
 
 const SearchBar = (props: SearchBarProps) => {
     return (
-        <SearchBarWrapper>
+        <SearchBarWrapper fontBold={props.fontBold}>
             <SearchIconImg src={props.icon} alt={props.imgAlt} />
             <SearchInput
                 type="text"
@@ -26,18 +27,26 @@ const SearchBar = (props: SearchBarProps) => {
 
 export default SearchBar;
 
-const SearchBarWrapper = styled.div`
+type SearchBarWrapperProps = {
+    fontBold?: boolean;
+};
+
+const SearchBarWrapper = styled.div<SearchBarWrapperProps>`
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
     padding: 10px 0;
+    margin-bottom: 10px;
     border-bottom: 2px solid ${colors.primaryColor};
     width: 100%;
     min-width: 300px;
 
+    @media (min-width: 1080px) {
+        margin-bottom: 0;
+    }
+
     input {
         @media (min-width: 1080px) {
-            font-weight: 600;
+            font-weight: ${(props) => (props.fontBold ? "600" : "normal")};
         }
     }
 `;
