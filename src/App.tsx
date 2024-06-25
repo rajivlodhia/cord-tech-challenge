@@ -3,6 +3,7 @@ import "./css/app.css";
 import Discover from "./pages/discover";
 import styled from "styled-components";
 import SideNavBar from "./components/sidenavbar";
+import NotFound from "./pages/not-found";
 
 function App() {
     return (
@@ -11,8 +12,8 @@ function App() {
                 <SideNavBar />
                 <ContentWrapper>
                     <Routes>
-                        {/* TODO: Make it so homepage switches to the /discover page */}
                         <Route path="/discover" element={<Discover />} />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </ContentWrapper>
             </PageContainer>
