@@ -49,7 +49,9 @@ const SearchFilters = (props: SearchFiltersProps) => {
             </SearchFiltersCont>
             <SearchFiltersCont
                 marginBottom
-                paddingTopDesktop={0}
+                // Changing this padding and margin to even out the space between filters and hide the border radius
+                paddingTopDesktop={5}
+                marginTopDesktop={-5}
                 hideOnMobile={!isFiltersOpen}
             >
                 <SearchBar
@@ -82,6 +84,7 @@ type SearchFilterContProps = {
     marginBottom?: boolean;
     hideOnMobile?: boolean;
     paddingTopDesktop?: number;
+    marginTopDesktop?: number;
 };
 
 const FiltersWrapper = styled.div`
@@ -120,6 +123,12 @@ const SearchFiltersCont = styled.div<SearchFilterContProps>`
             props.paddingTopDesktop !== undefined &&
             css`
                 padding-top: ${props.paddingTopDesktop}px;
+            `}
+
+        ${(props) =>
+            props.marginTopDesktop !== undefined &&
+            css`
+                margin-top: ${props.marginTopDesktop}px;
             `}
     }
 
