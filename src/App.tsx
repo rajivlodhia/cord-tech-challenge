@@ -5,7 +5,7 @@ import styled from "styled-components";
 import SideNavBar from "./components/sidenavbar";
 import NotFound from "./pages/not-found";
 
-function App() {
+const App = () => {
     return (
         <BrowserRouter>
             <PageContainer>
@@ -19,7 +19,7 @@ function App() {
             </PageContainer>
         </BrowserRouter>
     );
-}
+};
 
 export default App;
 
