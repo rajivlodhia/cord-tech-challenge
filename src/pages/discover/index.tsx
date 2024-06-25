@@ -50,6 +50,8 @@ const Discover = () => {
     };
 
     // Write a function to get the movie details based on the movie id taken from the URL.
+    // Currently unused but will be used when the movie details pop-up is implemented.
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const getMovieDetails = async (movieId: number) => {
         const movieDetails = await fetcher.getMovieDetails(movieId);
 
